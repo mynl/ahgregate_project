@@ -101,18 +101,8 @@ def rst_to_py(from_dir, to_dir):
     """
     Convert code in all rst files in from_dir to md files
     """
-    rst_to_py_dir(from_dir, to_dir)
-    if from_dir == 'doc':
-        from_dir = 'c:\\s\\telos\\python\\aggregate_project\\doc'
 
-    from_dir = Path(from_dir)
-
-    logger.info(from_dir.resolve())
-    assert from_dir.exists()
-
-    for i, fn in enumerate(Path(from_dir).glob('**/*.rst')):
-        logger.info(f'Converting file {i}:  {fn}')
-        rst_to_py_work(fn, to_dir)
+    rst_to_py_dir_work(from_dir, to_dir)
 
 
 @main.command(short_help="Test all Python scripts in directory.")
@@ -128,7 +118,7 @@ def test_scripts(dir_name, pattern, n_workers):
 @click.argument("pattern", type=str, default='*.py')
 @click.argument("n-workers", type=int, default=7)
 def agg_test(dir_name, pattern, n_workers):
-    print(dir_name, pattern, n_workers)
-    rst_to_py_dir('doc', dir_name)
+    print(f'Executing agg test: input {dir_name}, files {pattern}, {n_workers} processes')
+    rst_to_py_dir_work('doc', dir_name)
     asyncio.run(test_scripts_work(dir_name, pattern=pattern, n_workers=n_workers))
 

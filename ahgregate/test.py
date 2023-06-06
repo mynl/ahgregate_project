@@ -38,16 +38,17 @@ async def run_cmd(worker, cmd):
     if proc.returncode == 0:
         logger.info(f'[OK:    {cmd!r} exited with {proc.returncode} // {worker}]')
     else:
+        # this is the trigger there was an error, not finding the word Error
+        # in the output. That can be legitimate output. Hence:
         logger.warning(f'[ERROR: {cmd!r} exited with {proc.returncode} // {worker}]')
     fn = args[1]
     if stdout:
         so = stdout.decode()
         first_error = so.find('Error')
         p = Path(fn)
-        if first_error >= 0:
-            logger.warning(f'        errors for {cmd!r}')
+        if first_error >= 0 and proc.returncode:
             p.with_suffix('.error').write_text(so[first_error:], encoding='utf-8')
-        # also write the whole thing
+        # always write the whole thing
         p.with_suffix('.output').write_text(so, encoding='utf-8')
     if stderr:
         se = stderr.decode()

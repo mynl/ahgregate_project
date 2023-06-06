@@ -1,4 +1,10 @@
+from importlib.metadata import version, PackageNotFoundError
 
-__version__ = '0.1.0'
+try:
+    __version__ = version("ahgregate")
+except PackageNotFoundError:
+    # package is not installed
+    print('ahgregate is not installed')
+    pass
 
 from . scripts import *

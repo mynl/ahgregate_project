@@ -71,3 +71,5 @@ ahg = "ahgregate.scripts:main"
 
 [tool.setuptools_scm]
 write_to = "ahgregate/_version.py"
+version_scheme = "post-release"
+local_scheme = "node-and-date"

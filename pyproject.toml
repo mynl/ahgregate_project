@@ -63,7 +63,7 @@ dev = [
 include-package-data = true
 packages = ["ahgregate"]
 
-# [tool.setuptools.dynamic]
+# [tool.setuptools.dynamic] sdf
 # version  = { attr = "aggregate.__version__" }
 
 [project.scripts]

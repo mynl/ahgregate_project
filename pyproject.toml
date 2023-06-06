@@ -25,6 +25,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Mathematics",
 ]
 dependencies = [
+    "aggregate",
     "IPython",
     "click",
     "ipykernel",
@@ -62,8 +63,11 @@ dev = [
 include-package-data = true
 packages = ["ahgregate"]
 
-[tool.setuptools.dynamic]
-version  = { attr = "aggregate.__version__" }
+# [tool.setuptools.dynamic]
+# version  = { attr = "aggregate.__version__" }
 
 [project.scripts]
 ahg = "ahgregate.scripts:main"
+
+[tool.setuptools_scm]
+write_to = "ahgregate/_version.py"

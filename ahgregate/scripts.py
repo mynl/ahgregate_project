@@ -115,10 +115,24 @@ def test_scripts(dir_name, pattern, n_workers):
 
 @main.command(short_help="Quick test of documentation for aggregate. Optionally subset by pattern.")
 @click.argument("dir-name", type=click.Path(), default='\\temp\\z\\agg_doctest')
-@click.argument("pattern", type=str, default='*.py')
-@click.argument("n-workers", type=int, default=7)
+@click.argument("pattern", type=str, default='*.py') # , help='Pattern to match files to test.')
+@click.argument("n-workers", type=int, default=7) # , help='Number of worker processes to use.')
 def agg_test(dir_name, pattern, n_workers):
     print(f'Executing agg test: input {dir_name}, files {pattern}, {n_workers} processes')
     rst_to_py_dir_work('doc', dir_name)
     asyncio.run(test_scripts_work(dir_name, pattern=pattern, n_workers=n_workers))
+
+
+@main.command(short_help="Build Pricing Insurance Risk Case Study exhibits.")
+@click.argument("case-name", nargs=-1) # , help="Name of Case Study to run: discrete, tame, cnc (cat/non-cat), "
+# "hs (hurricane and severe convective storm). Default is all.")
+def pir_cases(case_name):
+    """
+    Run case studies
+    :param case_name:
+    :return:
+    """
+    print(f'Executing cases: {case_name}.')
+    pir_cases_work(case_name)
+
 

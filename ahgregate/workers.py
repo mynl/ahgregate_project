@@ -126,3 +126,17 @@ def rst_to_py_dir_work(from_dir, to_dir):
         rst_to_py_work(fn, to_dir)
 
 
+def pir_cases_work(case_name):
+    """
+    Run the PIR case studies from aggregate.
+
+    :param case_name:
+    :return:
+    """
+    if case_name[0] == 'all':
+        case_name = ('tame', 'cnc', 'hs')
+
+    for case in case_name:
+        logger.info(f'Running {case}')
+        print('NYI\n'*10)
+
